@@ -80,7 +80,7 @@ class RoverState():
         self.send_pickup = False # Set to True to trigger rock pickup
         self.position_history = deque()
         self.prev_pos = (0,0)
-        self.max_history_length = 30
+        self.max_history_length = 90
         self.stuck_threshold = 1
         self.back_delta = 0
         self.back_allowance = 3

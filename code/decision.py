@@ -44,6 +44,7 @@ def decision_step(Rover):
                     # we're stuck, put it in reverse and try again
                     Rover.mode = 'backward'
                     Rover.back_delta = 0
+                    Rover.back_count = 0
 
             # Check the extent of navigable terrain
             if len(Rover.nav_angles) >= Rover.stop_forward:
@@ -99,10 +100,12 @@ def decision_step(Rover):
             if Rover.back_delta < Rover.back_allowance:
                 Rover.steer = 0
                 Rover.throttle = -1 * Rover.throttle_set
-            elif Rover.back_delta > Rover.back_allowance:
+            Rover.back_count += 1
+            if Rover.back_delta > Rover.back_allowance or Rover.back_count > 50:
                 Rover.mode = 'stop'
                 Rover.back_delta = 0
                 Rover.position_history.clear()
+
 
 
     # Just to make the rover do something
